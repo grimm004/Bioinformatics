@@ -48,7 +48,7 @@ start = time.time()
 # Intialise the scoring matrix and backtracking matrix and call the function to populate them
 # Use the backtracking matrix to find the optimal alignment 
 # To work with the printing functions below the best alignment should be called best_alignment and its score should be called best_score. 
-
+print(seq1, seq2)
 
 
 #-------------------------------------------------------------
