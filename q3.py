@@ -64,10 +64,10 @@ def WPGMA(filename):
         print(species)
         print_matrix(matrix)
         print()
-    
+
     # Draw graph
     nx.draw(g, with_labels=True)
-    plt.savefig('.'.join(filename.split('.')[:-1]) + '.png')
+    plt.savefig('.'.join(filename.split('.')[:-1]) + '_test.png')
     plt.close()
 
 
@@ -78,3 +78,4 @@ def print_matrix(m):
 if __name__ == '__main__':
     WPGMA('matrix1.txt')
     WPGMA('matrix2.txt')
+    WPGMA('matrix3.txt')
