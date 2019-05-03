@@ -1,12 +1,15 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 import random
+import time
 
 
 def WPGMA(filename):
     text_matrix = []
     with open(filename, 'rt') as file:
         text_matrix = file.readlines()
+
+    start_time = time.time()
     
     species = []
     matrix = []
@@ -66,7 +69,11 @@ def WPGMA(filename):
         print(species)
         print_matrix(matrix)
         print()
+        
+    end_time = time.time()
 
+    print("Execution Time: %f" % (end_time - start_time))
+    
     # Draw graph
     pos = hierarchy_pos(g, species[0])
     nx.draw(g, pos=pos, with_labels=True)
@@ -75,7 +82,7 @@ def WPGMA(filename):
 
 
 def print_matrix(m):
-    print('[%s]' % ',\n '.join(', '.join(str(e) for e in r) for r in m) if len(m) > 0 else 'NaM')
+    print('[%s]' % ',\n '.join(',\t'.join(str(e) for e in r) for r in m) if len(m) > 0 else 'NaM')
 
 
 def hierarchy_pos(G, root=None, width=1., vert_gap = 0.2, vert_loc = 0, xcenter = 0.5):
@@ -142,10 +149,3 @@ def hierarchy_pos(G, root=None, width=1., vert_gap = 0.2, vert_loc = 0, xcenter 
 
 
     return _hierarchy_pos(G, root, width, vert_gap, vert_loc, xcenter)
-
-
-if __name__ == '__main__':
-    WPGMA('matrix1.txt')
-    WPGMA('matrix2.txt')
-    WPGMA('matrix3.txt')
-    WPGMA('matrix4.txt')
