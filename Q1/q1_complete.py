@@ -4,58 +4,18 @@ import sys
 
 
 # YOUR FUNCTIONS GO HERE -------------------------------------
-# 1. Populate the scoring matrix and the backtracking matrix
-
-# ------------------------------------------------------------
-
-
-
-# DO NOT EDIT ------------------------------------------------
-# Given an alignment, which is two strings, display it
-
-def displayAlignment(alignment):
-    string1 = alignment[0]
-    string2 = alignment[1]
-    string3 = ''
-    for i in range(min(len(string1),len(string2))):
-        if string1[i]==string2[i]:
-            string3=string3+"|"
-        else:
-            string3=string3+" "
-    print('Alignment ')
-    print('String1: '+string1)
-    print('         '+string3)
-    print('String2: '+string2+'\n\n')
-
-# ------------------------------------------------------------
-
-
-# DO NOT EDIT ------------------------------------------------
-# This opens the files, loads the sequences and starts the timer
-file1 = open(sys.argv[1], 'r')
-seq1=file1.read()
-file1.close()
-file2 = open(sys.argv[2], 'r')
-seq2=file2.read()
-file2.close()
-start = time.time()
-
-#-------------------------------------------------------------
-
-
-# YOUR CODE GOES HERE ----------------------------------------
-# The sequences are contained in the variables seq1 and seq2 from the code above.
-# Intialise the scoring matrix and backtracking matrix and call the function to populate them
-# Use the backtracking matrix to find the optimal alignment 
-# To work with the printing functions below the best alignment should be called best_alignment and its score should be called best_score. 
 BASE_SCORES = { 'A': 4, 'C': 3, 'G': 2, 'T': 1 }
 MISSMATCH_SCORE = -3
 GAP_SCORE = -2
 
 
+def print_matrix(m):
+    print('[%s]' % ',\n '.join(', '.join(str(e) for e in r) for r in m) if len(m) > 0 else 'NaM')
+
+
 def align(a, b):
     if len(a) == 0 or len(b) == 0:
-        return ('', 0)
+        return ('', '', 0)
 
     # Initialise empty score and backtrack matrices
     score = [[None for _ in range(len(a) + 1)] for _ in range(len(b) + 1)]
@@ -116,6 +76,47 @@ def align(a, b):
             alignment[1] = '-' + alignment[1]
             j -= 1
     return (alignment[0], alignment[1]), score[-1][-1]
+
+# ------------------------------------------------------------
+
+# DO NOT EDIT ------------------------------------------------
+# Given an alignment, which is two strings, display it
+
+def displayAlignment(alignment):
+    string1 = alignment[0]
+    string2 = alignment[1]
+    string3 = ''
+    for i in range(min(len(string1),len(string2))):
+        if string1[i]==string2[i]:
+            string3=string3+"|"
+        else:
+            string3=string3+" "
+    print('Alignment ')
+    print('String1: '+string1)
+    print('         '+string3)
+    print('String2: '+string2+'\n\n')
+
+# ------------------------------------------------------------
+
+
+# DO NOT EDIT ------------------------------------------------
+# This opens the files, loads the sequences and starts the timer
+file1 = open(sys.argv[1], 'r')
+seq1=file1.read()
+file1.close()
+file2 = open(sys.argv[2], 'r')
+seq2=file2.read()
+file2.close()
+start = time.time()
+
+#-------------------------------------------------------------
+
+
+# YOUR CODE GOES HERE ----------------------------------------
+# The sequences are contained in the variables seq1 and seq2 from the code above.
+# Intialise the scoring matrix and backtracking matrix and call the function to populate them
+# Use the backtracking matrix to find the optimal alignment 
+# To work with the printing functions below the best alignment should be called best_alignment and its score should be called best_score. 
 
 best_alignment, best_score = align(seq1, seq2)
 

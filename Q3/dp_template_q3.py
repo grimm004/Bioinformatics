@@ -31,8 +31,6 @@ start = time.time()
 
 #-------------------------------------------------------------
 
-
-# DO NOT EDIT (unless you want to turn off displaying alignments for large sequences)------------------
 # This calculates the time taken and will print out useful information 
 stop = time.time()
 time_taken=stop-start
